@@ -22,9 +22,10 @@ class Book {
     void print_book() const;
 };
 
-struct Books {
+class Books {
     std::vector<Book> m_books;
 
+    public:
     Books();
 
     const Book& operator [](unsigned long long index) {

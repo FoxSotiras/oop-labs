@@ -8,8 +8,7 @@ Book::Book(const Book &other_book) {
     m_title = other_book.m_title;
 }
 
-Book::Book(const unsigned long long &id, const std::string &author,
-        const std::string &title) {
+Book::Book(const unsigned long long &id, const std::string &author, const std::string &title) {
     m_id = id;
     m_author = author;
     m_title = title;

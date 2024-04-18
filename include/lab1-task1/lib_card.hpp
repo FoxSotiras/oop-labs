@@ -1,6 +1,5 @@
 #include "book.hpp"
 #include <chrono>
-#include <vector>
 
 #pragma once
 
@@ -13,8 +12,23 @@ class LibCard {
 
     public:
     LibCard(const LibCard &other_card);
-    LibCard(const Book &book = Book(), const std::string &telephone_number = "",
-        const std::string &name = "");
+    LibCard(const Book &book = Book(), const std::string &telephone_number = "", const std::string &name = "");
+
+    const std::chrono::year_month_day& get_return_date() const;
+
     void fill_card();
-    void print_card();
+    void print_card() const;
+};
+
+class LibCards {
+    std::vector<LibCard> m_cards;
+
+    public:
+    const LibCard& operator [](unsigned long long index) {
+        return m_cards[index];
+    }
+
+    void create_card();
+    void sort_cards();
+    std::vector<LibCard> get_list();
 };

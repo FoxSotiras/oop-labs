@@ -4,5 +4,6 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 project(lab1)
 set(SOURCE src/book.cpp
            src/lib_card.cpp
+           src/polynomial.cpp
            src/main.cpp)
 add_executable("${PROJECT_NAME}" "${SOURCE}")

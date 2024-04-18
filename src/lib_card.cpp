@@ -32,6 +32,12 @@ void LibCard::fill_card() {
     book_id:
     std::cout << "Enter the book id: ";
     std::cin >> id;
+    if (!std::cin) {
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cout << "invalid book id, retry." << '\n';
+        goto book_id;
+    }
     try {
         m_book = books.find_book(id);
     } catch (const std::exception &error) {

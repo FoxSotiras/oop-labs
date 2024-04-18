@@ -14,28 +14,8 @@ Book::Book(const unsigned long long &id, const std::string &author, const std::s
     m_title = title;
 }
 
-void Book::set_id(const unsigned long long &id) {
-    m_id = id;
-}
-
 const unsigned long long& Book::get_id() const {
     return m_id;
-}
-
-void Book::set_author(const std::string &author) {
-    m_author = author;
-}
-
-const std::string& Book::get_author() const {
-    return m_author;
-}
-
-void Book::set_title(const std::string &title) {
-    m_title = title;
-}
-
-const std::string& Book::get_title() const {
-    return m_title;
 }
 
 void Book::print_book() const {

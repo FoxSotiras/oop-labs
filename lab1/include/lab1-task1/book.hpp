@@ -13,6 +13,8 @@ class Book {
     Book(const unsigned long long &id = 0, const std::string &author = "", const std::string &title = "");
 
     const unsigned long long& get_id() const;
+    const std::string& get_author() const;
+    const std::string& get_title() const;
 
     void print_book() const;
 };
@@ -27,5 +29,6 @@ class Books {
         return m_books[index];
     }
 
+    void print_books();
     const Book& find_book(unsigned long long id) const;
 };

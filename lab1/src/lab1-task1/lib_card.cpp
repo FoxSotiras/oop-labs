@@ -1,8 +1,10 @@
-#include "../include/lab1-task1/lib_card.hpp"
+#include "../../include/lab1-task1/lib_card.hpp"
 #include <iostream>
 #include <stdexcept>
 
-Books books;
+namespace {
+    Books books;
+}
 
 LibCard::LibCard(const LibCard &other_card) {
     m_book = other_card.m_book;
@@ -26,23 +28,25 @@ const std::chrono::year_month_day& LibCard::get_return_date() const {
 
 void LibCard::fill_card() {
     unsigned long long id = 0;
+    bool is_ok = false;
 
     std::cout << "Enter information about library card:" << '\n';
 
-    book_id:
-    std::cout << "Enter the book id: ";
-    std::cin >> id;
-    if (!std::cin) {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        std::cout << "invalid book id, retry." << '\n';
-        goto book_id;
-    }
-    try {
-        m_book = books.find_book(id);
-    } catch (const std::exception &error) {
-        std::cout << error.what() << '\n';
-        goto book_id;
+    while (!is_ok) {
+        books.print_books();
+        std::cout << "Enter the book id: ";
+        std::cin >> id;
+        if (!std::cin) {
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cout << "invalid book id, retry." << '\n';
+        }
+        try {
+            m_book = books.find_book(id);
+            is_ok = true;
+        } catch (const std::exception &error) {
+            std::cout << error.what() << '\n';
+        }
     }
 
     std::cout << "Enter a contact telephone: ";

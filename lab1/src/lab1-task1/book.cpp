@@ -1,4 +1,4 @@
-#include "../include/lab1-task1/book.hpp"
+#include "../../include/lab1-task1/book.hpp"
 #include <iostream>
 #include <stdexcept>
 
@@ -18,6 +18,14 @@ const unsigned long long& Book::get_id() const {
     return m_id;
 }
 
+const std::string& Book::get_author() const {
+    return m_author;
+}
+
+const std::string& Book::get_title() const {
+    return m_title;
+}
+
 void Book::print_book() const {
     std::cout << "Book id: " << m_id << '\n';
     std::cout << "Book author: " << m_author << '\n';
@@ -32,6 +40,14 @@ Books::Books() {
     {
         Book book(i + 1, authors[i], titles[i]);
         m_books.push_back(book);
+    }
+}
+
+void Books::print_books() {
+    std::cout << "Book list:" << '\n';
+    for (size_t i = 0; i < m_books.size(); ++i) {
+        std::cout << i + 1 << ". " << "ID: " << m_books[i].get_id() << "\n   " << "Author: " << m_books[i].get_author()
+        << "\n   " << "Title: " << m_books[i].get_title() << '\n';
     }
 }
 

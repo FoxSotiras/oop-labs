@@ -14,6 +14,6 @@ class Polynomial {
     Polynomial operator -(const Polynomial &operand);
     Polynomial operator *(const Polynomial &operand);
 
-    double get_value(const double &x);
+    double get_value(double x);
     void print_polynomial();
 };

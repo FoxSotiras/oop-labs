@@ -100,7 +100,7 @@ class dynamic_array {
         return *this;
     }
 
-    bool operator ==(const dynamic_array& other) {
+    bool operator ==(const dynamic_array& other) const {
         if (size() != other.size()) {
             return false;
         }

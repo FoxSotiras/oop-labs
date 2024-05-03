@@ -80,9 +80,8 @@ class dynamic_array {
 
     friend std::ostream& operator <<(std::ostream& stream, const dynamic_array& array) {
         size_t len = array.size();
-        std::string space = " ";
         for (size_t i = 0; i < len; ++i) {
-            stream << std::to_string(array.m_array[i]) << space;
+            stream << std::to_string(array.m_array[i]) + " ";
         }
         return stream;
     }

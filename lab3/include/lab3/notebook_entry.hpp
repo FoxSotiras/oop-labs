@@ -1,48 +1,83 @@
+#pragma once
+
 #include <chrono>
+#include <forward_list>
+#include <iostream>
 #include <string>
 
-#pragma once
+using namespace std::chrono;
 
 class NotebookEntry {
     public:
-    NotebookEntry() : m_surname(""), m_name(""), m_telephone_number(""), m_birth_date(),
-    m_residential_address("") {}
-    NotebookEntry(const std::string& surname, const std::string& name, const std::string& telephone_number,
-    const unsigned short& day, const unsigned short& month, const unsigned int& year,
-    const std::string& address) : m_surname(surname), m_name(name), m_telephone_number(telephone_number),
-    m_birth_date(std::chrono::year(year), std::chrono::month(month),
-    std::chrono::day(day)), m_residential_address(address) {}
-    NotebookEntry(const NotebookEntry& other) : m_surname(other.m_surname), m_name(other.m_name),
-    m_telephone_number(other.m_telephone_number), m_birth_date(other.m_birth_date),
-    m_residential_address(other.m_residential_address) {}
-    ~NotebookEntry();
+    NotebookEntry():
+    m_surname(""),
+    m_name(""),
+    m_telephone(""),
+    m_birthday(year(), month(), day()),
+    m_address("") {}
 
-    void set_surname(const std::string& surname) { m_surname = surname; }
-    std::string get_surname() { return m_surname; }
+    NotebookEntry(
+        const char* surname,
+        const char* name,
+        const char* telephone,
+        unsigned short p_year,
+        unsigned short p_month,
+        unsigned short p_day,
+        const char* address):
+    m_surname(surname),
+    m_name(name),
+    m_telephone(telephone),
+    m_birthday(year(p_year), month(p_month), day(p_day)),
+    m_address(address) {}
 
-    void set_name(const std::string& name) { m_name = name; }
-    std::string get_name() { return m_name; }
+    NotebookEntry(
+        const std::string& surname,
+        const std::string& name,
+        const std::string& telephone,
+        year_month_day p_day,
+        const std::string& address):
+    m_surname(surname),
+    m_name(name),
+    m_telephone(telephone),
+    m_birthday(p_day),
+    m_address(address) {}
 
-    void set_telephone_number(const std::string& telephone_number) { m_telephone_number = telephone_number; }
-    std::string get_telephone_number() { return m_telephone_number; }
+    NotebookEntry(const NotebookEntry& other):
+    m_surname(other.m_surname),
+    m_name(other.m_name),
+    m_telephone(other.m_telephone),
+    m_birthday(other.m_birthday),
+    m_address(other.m_address) {}
 
-    void set_birth_day(const unsigned short& day, const unsigned short& month, const unsigned int& year) {
-        m_birth_date = std::chrono::year_month_day(std::chrono::year(year),
-        std::chrono::month(month),std::chrono::day(day));
-    } 
-    std::chrono::year_month_day get_birth_date() { return m_birth_date; }
+    virtual ~NotebookEntry() { std::cout << "The object has been deleted" << '\n'; }
 
-    void set_address(const std::string& address) { m_residential_address = address; }
-    std::string get_address() { return m_residential_address; }
+    void set_surname(const char* surname) { m_surname = surname; }
+    const std::string& get_surname() const { return m_surname; }
 
-    std::string get_telephone_number(std::vector<NotebookEntry> entrys,
-    const std::string& surname, const std::string& name) const;
-    bool check_people_living_together(const NotebookEntry& first, const NotebookEntry& second) const;
+    void set_name(const char* name) { m_name = name; }
+    const std::string& get_name() const { return m_name; }
+
+    void set_telephone(const char* telephone) { m_telephone = telephone; }
+    const std::string& get_telephone() const { return m_telephone; }
+
+    void set_birthday(
+        unsigned short p_year,
+        unsigned short p_month,
+        unsigned short p_day) { 
+        m_birthday = year_month_day(year(p_year), month(p_month), day(p_day)); 
+    }
+    const year_month_day& get_birthday() const { return m_birthday; }
+
+    void set_address(const char* address) { m_address = address; }
+    const std::string& get_address() const { return m_address; }
+
+    static const std::string& find_telephone(const std::forward_list<NotebookEntry>& entrys, const char* surname, const char* name);
+    static bool is_living_together(const NotebookEntry& first, const NotebookEntry& second);
 
     protected:
     std::string m_surname;
     std::string m_name;
-    std::string m_telephone_number;
-    std::chrono::year_month_day m_birth_date;
-    std::string m_residential_address;
+    std::string m_telephone;
+    year_month_day m_birthday;
+    std::string m_address;
 };

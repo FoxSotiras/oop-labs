@@ -3,7 +3,7 @@ set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 project(lab3)
 
-add_compile_options(-Wall -Wextra -Wpedantic -stdlib=libc++)
+add_compile_options(-Wall -Wextra -Wpedantic)
 
 add_library(notebook_entry STATIC include/lab3/notebook_entry.hpp src/notebook_entry.cpp)
 target_include_directories(notebook_entry PRIVATE include/lab3)

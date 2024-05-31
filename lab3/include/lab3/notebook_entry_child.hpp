@@ -26,6 +26,8 @@ class NotebookEntryChild: public NotebookEntry {
     m_child_name(other.m_child_name),
     m_child_birthday(other.m_child_birthday) {}
 
+    ~NotebookEntryChild() { std::cout << "The object has been deleted" << '\n'; }
+
     private:
     std::string m_child_surname;
     std::string m_child_name;

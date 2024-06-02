@@ -1,32 +1,32 @@
 #include "notebook_entry.hpp"
+#include <string>
 
 class NotebookEntryChild: public NotebookEntry {
     public:
-    NotebookEntryChild():
-    NotebookEntry(),
-    m_child_surname(""),
-    m_child_name(""),
-    m_child_birthday(year(), month(), day()) {}
-
+    NotebookEntryChild();
     NotebookEntryChild(
         const NotebookEntry& parent,
-        const char* surname,
-        const char* name,
+        const std::string& surname,
+        const std::string& name,
         unsigned short p_year,
         unsigned short p_month,
-        unsigned short p_day):
-    NotebookEntry(parent),
-    m_child_surname(surname),
-    m_child_name(name),
-    m_child_birthday(year(p_year), month(p_month), day(p_day)) {}
+        unsigned short p_day
+    );
+    NotebookEntryChild(const NotebookEntryChild& other);
 
-    NotebookEntryChild(const NotebookEntryChild& other):
-    NotebookEntry(other.m_surname, other.m_name, other.m_telephone, other.m_birthday, other.m_address),
-    m_child_surname(other.m_child_surname),
-    m_child_name(other.m_child_name),
-    m_child_birthday(other.m_child_birthday) {}
+    void set_child_surname(const std::string& surname);
+    const std::string& get_child_surname() const;
 
-    ~NotebookEntryChild() { std::cout << "The object has been deleted" << '\n'; }
+    void set_child_name(const std::string& name);
+    const std::string& get_child_name() const;
+
+    void set_child_birthday(
+        unsigned short p_year,
+        unsigned short p_month,
+        unsigned short p_day
+    );
+    void set_child_birthday(const year_month_day& p_day);
+    const year_month_day& get_child_birthday() const;
 
     private:
     std::string m_child_surname;

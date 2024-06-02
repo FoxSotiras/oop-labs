@@ -1,4 +1,5 @@
 #include "../include/lab3/notebook_entry.hpp"
+#include <iostream>
 
 int main() {
     NotebookEntry one;

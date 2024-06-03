@@ -1,5 +1,7 @@
 #include "../include/lab3/notebook_entry_child.hpp"
+#include <chrono>
 #include <stdexcept>
+#include <string>
 
 NotebookEntryChild::NotebookEntryChild():
     NotebookEntry(),
@@ -44,3 +46,33 @@ void NotebookEntryChild::set_child_birthday(
 }
 void NotebookEntryChild::set_child_birthday(const year_month_day& p_day) { m_birthday = p_day; }
 const year_month_day& NotebookEntryChild::get_child_birthday() const { return m_birthday; }
+
+std::string NotebookEntryChild::get_child(const std::forward_list<NotebookEntryChild>& entrys, const std::string& surname, const std::string& name) {
+    if (entrys.empty()) {
+        throw std::runtime_error("List is empty.");
+    }
+
+    std::string child = "";
+
+    auto begin = entrys.begin();
+    auto end = entrys.end();
+    while (begin != end) {
+        if (begin->m_surname == surname && begin->m_name == name) {
+            child += "Telephone: " + begin->m_telephone + "\n" +
+                "Child name: " + begin->m_child_name + "\n" +
+                "Child birthday: " + std::to_string(static_cast<int>(begin->m_child_birthday.year())) +
+                "-" + std::to_string(static_cast<unsigned int>(begin->m_child_birthday.month())) +
+                "-" + std::to_string(static_cast<unsigned int>(begin->m_child_birthday.day()));
+
+            return child;
+        }
+        ++begin;
+    }
+
+    throw std::runtime_error("Object with that parameters is not found");
+}
+
+bool NotebookEntryChild::check_age(const NotebookEntryChild& first, const NotebookEntryChild& second) {
+    return floor<years>(system_clock::now() - sys_days(first.m_child_birthday)) == 
+        floor<years>(system_clock::now() - sys_days(second.m_child_birthday));
+}

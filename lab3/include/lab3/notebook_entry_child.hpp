@@ -28,6 +28,9 @@ class NotebookEntryChild: public NotebookEntry {
     void set_child_birthday(const year_month_day& p_day);
     const year_month_day& get_child_birthday() const;
 
+    static std::string get_child(const std::forward_list<NotebookEntryChild>& entrys, const std::string& surname, const std::string& name);
+    static bool check_age(const NotebookEntryChild& first, const NotebookEntryChild& second);
+
     private:
     std::string m_child_surname;
     std::string m_child_name;

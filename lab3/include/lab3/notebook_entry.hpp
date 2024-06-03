@@ -49,7 +49,7 @@ class NotebookEntry {
     void set_address(const std::string& address);
     const std::string& get_address() const;
 
-    static const std::string& find_telephone(const std::forward_list<NotebookEntry>& entrys, const char* surname, const char* name);
+    static const std::string& find_telephone(const std::forward_list<NotebookEntry>& entrys, const std::string& surname, const std::string& name);
     static bool is_living_together(const NotebookEntry& first, const NotebookEntry& second);
 
     protected:

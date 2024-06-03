@@ -90,7 +90,11 @@ const year_month_day& NotebookEntry::get_birthday() const { return m_birthday; }
 void NotebookEntry::set_address(const std::string& address) { m_address = address; }
 const std::string& NotebookEntry::get_address() const { return m_address; }
 
-const std::string& NotebookEntry::find_telephone(const std::forward_list<NotebookEntry>& entrys, const char* surname, const char* name) {
+const std::string& NotebookEntry::find_telephone(const std::forward_list<NotebookEntry>& entrys, const std::string& surname, const std::string& name) {
+    if (entrys.empty()) {
+        throw std::runtime_error("List is empty.");
+    }
+
     auto begin = entrys.begin();
     auto end = entrys.end();
     while (begin != end) {

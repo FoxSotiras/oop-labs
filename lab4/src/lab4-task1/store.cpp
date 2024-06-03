@@ -15,7 +15,7 @@ void Store::save() {
         throw std::runtime_error("List is emplty");
     }
 
-    std::ofstream file("store.txt");
+    std::ofstream file("store.txt");//is open?
     auto begin = m_animals.begin();
     auto end = m_animals.end();
 

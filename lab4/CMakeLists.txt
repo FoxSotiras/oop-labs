@@ -20,5 +20,12 @@ target_sources(files PRIVATE
     src/lab4-task2/files.cpp
 )
 
+add_library(binary STATIC include/lab4-task3/binary.hpp src/lab4-task3/binary.cpp)
+target_include_directories(binary PRIVATE include/lab4-task3)
+target_sources(binary PRIVATE
+    src/lab4-task3/binary.cpp
+)
+
 add_executable("${PROJECT_NAME}" src/main.cpp)
-target_link_libraries("${PROJECT_NAME}" animal files)
+target_link_libraries("${PROJECT_NAME}" animal files binary)
+file(INSTALL text/ DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/text")

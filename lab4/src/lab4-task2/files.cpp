@@ -7,8 +7,16 @@
 #include <stdexcept>
 #include <string>
 
+namespace {
+    void check_file(const std::ifstream& file) {
+        if (!file) {
+            throw std::runtime_error("File doesn't exist");
+        }
+    }
+}
+
 void Files::create_file() {
-    std::ofstream file(m_filename);
+    std::ofstream file(m_filename);//move to class
     std::random_device rd;
     std::uniform_int_distribution<unsigned int> dist(0, 10000);
 
@@ -22,9 +30,7 @@ void Files::create_file() {
 
 void Files::print_file() {
     std::ifstream file(m_filename);
-    if (!file) {
-        throw std::runtime_error("File doesn't exist");
-    }
+    check_file(file);
 
     std::string line;
     while (std::getline(file, line)) {
@@ -53,8 +59,9 @@ void Files::add_line() {
 }
 
 void Files::create_additional() {
-    std::ofstream file_output("additional.txt");
+    std::ofstream file_output("additional.txt");//argument
     std::ifstream file_input(m_filename);
+    check_file(file_input);
 
     std::string line;
     unsigned short count = 0;

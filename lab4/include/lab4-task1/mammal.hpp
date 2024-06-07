@@ -8,5 +8,5 @@ public:
     Mammal(const std::string& sound);
     Mammal(const Mammal& other);
 
-    void communicate() override;
+    void communicate() const override;
 };

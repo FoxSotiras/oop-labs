@@ -8,7 +8,7 @@ public:
     Animal(const std::string& sound);
     Animal(const Animal& other);
 
-    virtual void communicate();//pure virtual
+    virtual void communicate() const = 0;//pure virtual
     const std::string& get_sound() const;
 
     virtual ~Animal();

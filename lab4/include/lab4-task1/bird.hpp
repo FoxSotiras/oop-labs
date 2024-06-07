@@ -8,5 +8,5 @@ public:
     Bird(const std::string& sound);
     Bird(const Bird& other);
 
-    void communicate() override;
+    void communicate() const override;
 };

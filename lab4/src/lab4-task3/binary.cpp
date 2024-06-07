@@ -46,10 +46,10 @@ void Binary::read_from_binary() {
     file.close();
 }
 
-void Binary::store_garage() {
+void Binary::store_garage(const std::string& filename) {
     std::fstream file_input(m_name, std::ios::binary | std::ios::in);
     check_file(file_input);
-    std::fstream file_output("add.bin", std::ios::binary | std::ios::out);
+    std::fstream file_output(filename, std::ios::binary | std::ios::out);
 
     Taxi taxi;
     file_input.seekg(0);

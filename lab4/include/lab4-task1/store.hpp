@@ -3,10 +3,11 @@
 
 class Store {
 public:
-    void add(const Animal& object);
+    void add(Animal* object);
     void remove();
     void save();
+    void all_communicate();
 
 private:
-    std::forward_list<Animal> m_animals;//Animal*
+    std::forward_list<Animal*> m_animals;//Animal*
 };

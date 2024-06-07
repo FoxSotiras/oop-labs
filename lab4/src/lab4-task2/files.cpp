@@ -2,7 +2,6 @@
 #include <fstream>
 #include <ios>
 #include <iostream>
-#include <limits>
 #include <random>
 #include <stdexcept>
 #include <string>
@@ -40,26 +39,16 @@ void Files::print_file() {
     file.close();
 }
 
-void Files::add_line() {
+void Files::add_line(int line) {
     std::ofstream file(m_filename, std::ios::app);
 
-    int line;
-    std::cout << "Input number to write: ";
-    if (std::cin >> line) {
-        file << line << '\n';
-    }
-    else {
-        std::cin.clear();
-        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        throw std::runtime_error("Invalid argument");
-        
-    }
+    file << line << '\n';
 
     file.close();
 }
 
-void Files::create_additional() {
-    std::ofstream file_output("additional.txt");//argument
+void Files::create_additional(const std::string& filename) {
+    std::ofstream file_output(filename);//argument
     std::ifstream file_input(m_filename);
     check_file(file_input);
 

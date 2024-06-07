@@ -1,8 +1,9 @@
 #include "../../include/lab4-task1/store.hpp"
+#include <iostream>
 #include <fstream>
 #include <stdexcept>
 
-void Store::add(const Animal& object) {
+void Store::add(Animal* object) {
     m_animals.push_front(object);
 }
 
@@ -20,9 +21,15 @@ void Store::save() {
     auto end = m_animals.end();
 
     while (begin != end) {
-        file << begin->get_sound() << '\n';
+        file << (*begin)->get_sound() << '\n';
         ++begin;
     }
 
     file.close();
+}
+
+void Store::all_communicate() {
+    for (const Animal* const animal : m_animals) {
+        animal->communicate();
+    }
 }
